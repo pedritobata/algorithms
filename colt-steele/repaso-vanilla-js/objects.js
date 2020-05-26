@@ -1,0 +1,1 @@
+console.log('Quise practicar pero mejor solo revisé la doc de w3school')
