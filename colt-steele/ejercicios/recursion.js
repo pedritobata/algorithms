@@ -52,5 +52,50 @@ function collectOddValues(arr){//esta es una funcion Helper. La verdadera recurs
     return odds;
 }
 
-const arr = [1,2,3,4,5,7,10,11];
+let arr = [1,2,3,4,5,7,10,11];
 console.log('Arreglo impares:', collectOddValues(arr));
+
+console.log('********* PURE RECURSION ************');
+// El mismo ejemplo anterior pero sin usar un helper method para usar la variable odds afuera de
+// la funcion recursiva
+function pureRecursion(arr){
+    let temp = [];
+    if(arr.length === 0){
+        return temp;
+    }
+    if(arr[0] % 2 !== 0){
+        temp.push(arr[0]);
+    }
+    temp = temp.concat(pureRecursion(arr.slice(1)));
+    return temp;
+}
+
+arr = [1,2,3,4,5,7,10,11];
+console.log('Arreglo impares usando Pure Recursion:', pureRecursion(arr));
+
+console.log('********* Ejercicio 16 :  is Palindrome ************');
+// isPalindrome('awesome') // false
+// isPalindrome('foobar') // false
+// isPalindrome('tacocat') // true
+// isPalindrome('amanaplanacanalpanama') // true
+// isPalindrome('amanaplanacanalpandemonium') // false
+
+// Usar RECURSION!!!
+function isPalindrome(word){
+    // add whatever parameters you deem necessary - good luck!
+    
+    // Descartamos las palabras que no aplican de arranque a ser palindromos
+    if(!word || word.length % 2 === 0) return false;
+
+    //Base case
+    if(word.length === 1) return true;
+
+    //logica
+    if(word[0] === word[word.length - 1]){
+        return isPalindrome(word.slice(1, word.length - 1));
+    }else{
+        return false;
+    }
+}
+let word = 'amanaplanacanalpandemonium';
+console.log(`isPalindrome(${word})`, isPalindrome(word));
