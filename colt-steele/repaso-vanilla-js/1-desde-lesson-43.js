@@ -26,6 +26,14 @@ c('person', person);
 fer.name = 'nandinho';
 c('person', person);
 
+// Special comparisons:
+
+c("NaN === NaN",NaN === NaN);
+c("undefined === undefined",undefined === undefined);
+c("null === null",null === null);
+c("null === undefined",null === undefined);
+c("null == undefined",null == undefined);
+
 
 
 
