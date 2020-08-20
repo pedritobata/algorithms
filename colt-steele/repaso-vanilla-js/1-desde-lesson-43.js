@@ -29,6 +29,7 @@ c('person', person);
 // Special comparisons:
 
 c("NaN === NaN",NaN === NaN);
+c("NaN == NaN",NaN == NaN);
 c("undefined === undefined",undefined === undefined);
 c("null === null",null === null);
 c("null === undefined",null === undefined);
