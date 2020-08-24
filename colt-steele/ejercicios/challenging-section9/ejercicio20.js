@@ -28,18 +28,23 @@ var obj2 = {
 
 function nestedEvenSum(obj){
    
-    const objSum = { sum : (obj['sum'] ? obj['sum'] : 0)};
+    let objSum = { sum : (obj['sum'] ? obj['sum'] : 0)};
     for(let key in obj){
-        if(!isNaN(obj[key]) && obj[key] !== 'sum'){
+        if(!isNaN(obj[key]) && key !== 'sum' && obj[key] % 2 === 0){
             objSum['sum'] += obj[key];
+            //console.log(objSum);
         }else if(typeof obj[key] === 'object'){
-            nestedEvenSum(Object.assign(objSum,obj[key]));
+          objSum = Object.assign(obj[key],{ sum : objSum['sum']})
+          //console.log(objSum);
+           const acumulado = nestedEvenSum(objSum);
+           //console.log('acumulado:',acumulado);
+           objSum['sum'] = acumulado['sum'];
         }
-        console.log(obj[key]);
+       
     }
-    return objSum;
+    return { sum : objSum['sum']};
 }
 
 const objeto = {a:1,b:2,c:3};
 console.log("****** solution 1 ********");
-console.log( "Sum of even numbers",  '=', nestedEvenSum(obj1) );
+console.log( "Sum of even numbers",  '=', nestedEvenSum(obj2) );
