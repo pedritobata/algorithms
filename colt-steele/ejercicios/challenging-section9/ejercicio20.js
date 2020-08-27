@@ -35,7 +35,7 @@ function nestedEvenSum(obj){
             //console.log(objSum);
         }else if(typeof obj[key] === 'object'){
           objSum = Object.assign(obj[key],{ sum : objSum['sum']})
-          //console.log(objSum);
+          //console.log(objSum);a
            const acumulado = nestedEvenSum(objSum);
            //console.log('acumulado:',acumulado);
            objSum['sum'] = acumulado['sum'];
