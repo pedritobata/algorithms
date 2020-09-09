@@ -43,6 +43,16 @@ class SinglyLinkedList{
         }
         return current;
     }
+
+    shift(){
+        let current = this.head;
+        this.head = current.next;
+        this.length--;
+        if(this.length === 0){
+            this.tail = null;
+        }
+        return current;
+    }
 }
 
 const list = new SinglyLinkedList();
@@ -51,5 +61,8 @@ list.push("there");
 list.push("Aguanta");
 console.log(list);
 
-console.log('poped',list.pop());
+//console.log('poped',list.pop());
+//console.log(list);
+
+console.log('shifted',list.shift());
 console.log(list);
