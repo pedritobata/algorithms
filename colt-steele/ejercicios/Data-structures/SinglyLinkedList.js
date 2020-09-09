@@ -45,6 +45,7 @@ class SinglyLinkedList{
     }
 
     shift(){
+        if(!this.head) return;
         let current = this.head;
         this.head = current.next;
         this.length--;
@@ -52,6 +53,19 @@ class SinglyLinkedList{
             this.tail = null;
         }
         return current;
+    }
+
+    unshift(val){
+        const newNode = new Node(val);
+        if(!this.head) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            newNode.next = this.head;
+            this.head = newNode
+        }
+        this.length++;
+        return this;
     }
 }
 
@@ -64,5 +78,7 @@ console.log(list);
 //console.log('poped',list.pop());
 //console.log(list);
 
-console.log('shifted',list.shift());
-console.log(list);
+/* console.log('shifted',list.shift());
+console.log(list); */
+
+console.log('unshifted',list.unshift("Periquito"));
