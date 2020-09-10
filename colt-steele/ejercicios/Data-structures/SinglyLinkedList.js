@@ -67,6 +67,37 @@ class SinglyLinkedList{
         this.length++;
         return this;
     }
+
+    get(index){
+        if(index < 0 || index >= this.length) return null;
+        let counter = 0;
+        let current = this.head;
+        while(index !== counter){
+            current = current.next;
+            counter++;
+        }
+        return current;
+    }
+
+    set(index, val){
+        const found = this.get(index);
+        if(found){
+           found.val = val; 
+           return true;
+        }
+        return false;
+    }
+
+    insert(index, val){
+        if(index < 0 || index > this.length) return false;
+        if(index === 0) return !!this.unshift(val);
+        if(index === this.length) return !!this.push(val);
+        const newNode = new Node(val);
+        this.get(index - 1).next = newNode;
+        newNode.next = this.get(index);
+        this.length++;
+        return true;
+    }
 }
 
 const list = new SinglyLinkedList();
@@ -82,3 +113,12 @@ console.log(list);
 console.log(list); */
 
 console.log('unshifted',list.unshift("Periquito"));
+
+console.log('get',list.get(2));
+console.log('set',list.set(1, "Where"));
+console.log(list);
+
+console.log('insert',list.insert(0, "Orientador!!"));
+console.log(list);
+console.log('insert',list.insert(list.length, "Nandinho!!"));
+console.log(list);
