@@ -13,6 +13,15 @@ class SinglyLinkedList{
         this.length = 0;
     }
 
+    print(){
+        console.log("**Printing elements....");
+        let current = this.head;
+        while(current){
+            console.log(current);
+            current = current.next ? current.next : undefined;
+        }
+    }
+
     push(val){
         let node = new Node(val);
         if(!this.head){
@@ -98,6 +107,32 @@ class SinglyLinkedList{
         this.length++;
         return true;
     }
+
+    remove(index){
+        if(!index || index < 0 || index >= this.length) return;
+        if(index === 0) return this.shift();
+        if(index === this.length - 1) return this.pop();
+        let previous = this.get(index - 1);
+        let removed = previous.next;
+        previous.next = removed.next;
+        this.length--;
+        return removed; 
+    }
+    // [25,36,4,69,90,22]  solo para guiarme
+    reverse(){
+        let node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+        let prev = null;
+        let next;
+        for(let i=0; i < this.length; i++){
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        return this;
+    }
 }
 
 const list = new SinglyLinkedList();
@@ -121,4 +156,10 @@ console.log(list);
 console.log('insert',list.insert(0, "Orientador!!"));
 console.log(list);
 console.log('insert',list.insert(list.length, "Nandinho!!"));
-console.log(list);
+list.print();
+
+console.log('---removed',list.remove(2));
+list.print();
+
+console.log('---reverse',list.reverse());
+list.print();
