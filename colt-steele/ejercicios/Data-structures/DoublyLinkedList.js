@@ -83,6 +83,31 @@ class DoublyLinkedList{
         return this;
     }
 
+    get(index){
+        if(index < 0 || index >= this.length) return null;
+        let count, current;
+        if(index <= this.length / 2){
+            count = 0; current = this.head;
+            while(count != index){
+                current = current.next;
+                count++;
+            }
+        }else{
+            count = this.length - 1; current = this.tail;
+            while(count != index){
+                current = current.prev;
+                current--;
+            }
+        }
+        return current;
+    }
+
+    set(index, val){
+        if(this.get(index) == null) return false;
+        let foundNode = this.get(index);
+        foundNode.val = val;
+        return true
+    }
 }
 
 const list = new DoublyLinkedList();
@@ -97,3 +122,9 @@ c("shifted:", list.shift());
 //list.print();
 list.unshift("Hello");
 list.print();
+c("getting",list.get(2));
+c("getting",list.get(-10));
+c("getting",list.get(10));
+c("setting",list.set(0, "Yo"));
+list.print();
+c("setting",list.set(10, "Yo"));
