@@ -108,6 +108,37 @@ class DoublyLinkedList{
         foundNode.val = val;
         return true
     }
+
+    insert(index, val){
+        if(index < 0 || index > this.length) return false;
+        if(index === 0) return !!this.unshift(val);
+        if(index === this.length) return !!this.push(val);
+
+        const newNode = new Node(val);
+        const beforeNode = this.get(index - 1);
+        const afterNode = this.get(index);
+        beforeNode.next = newNode;
+        newNode.prev = beforeNode;
+        newNode.next = afterNode;
+        afterNode.prev = newNode;
+
+        this.length++;
+        return true;
+    }
+
+    remove(index){
+        if(index < 0 || index >= this.length) return undefined;
+        if(index === 0) return this.shift();
+        if(index === this.length - 1) return this.pop();
+
+        const removedNode = this.get(index);
+        removedNode.prev.next = removedNode.next;
+        removedNode.next.prev = removedNode.prev;
+        removedNode.next = null;
+        removedNode.prev = null;
+        this.length--;
+        return removedNode;
+    }
 }
 
 const list = new DoublyLinkedList();
@@ -128,3 +159,8 @@ c("getting",list.get(10));
 c("setting",list.set(0, "Yo"));
 list.print();
 c("setting",list.set(10, "Yo"));
+c("insert",list.insert(2, "Perico"));
+c("insert",list.insert(0, "ayayay"));
+list.print();
+c("remove",list.remove(2));
+list.print();
