@@ -40,15 +40,46 @@ class BinarySearchTree{
             }
         }
     }
+
+    find(value){
+        if(this.root === null) return null;
+        let current = this.root;
+        while(current){
+            if(value < current.value){
+                current = current.left;
+            }else if(value > current.value){
+                current = current.right;
+            }else{
+                break;
+            }
+        }
+        return current;
+    }
+
+    breadthFirstSearch(){
+        let node = this.root, queue = [], result = [];
+        queue.push(node);
+        while(queue.length){
+            node = queue.shift();
+            result.push(node.value);
+            if(node.left) queue.push(node.left);
+            if(node.right) queue.push(node.right);
+        }
+        return result;
+    }
 }
 
 const bst = new BinarySearchTree();
 bst.insert(10);
-bst.insert(5);
-bst.insert(13);
-bst.insert(16);
-bst.insert(7);
-bst.insert(2);
-bst.insert(11);
-bst.print(10);
+bst.insert(6);
+bst.insert(15);
+bst.insert(20);
+bst.insert(3);
+bst.insert(8);
+// bst.insert(11);
+// bst.print(10);
 c(bst);
+c("found:",bst.find(5));
+c("found:",bst.find(2));
+c("found:",bst.find(20));
+c("bread first search:", bst.breadthFirstSearch());
