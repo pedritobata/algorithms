@@ -67,6 +67,38 @@ class BinarySearchTree{
         }
         return result;
     }
+    depthFirstSearchPreOrder(){
+        const data = [];
+        function traverse(node){
+            data.push(node.value);
+            if(node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+        }
+        traverse(this.root);
+        return data;
+    }
+
+    depthFirstSearchPostOrder(){
+        const data = [];
+        function traverse(node){
+            if(node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+            data.push(node.value);
+        }
+        traverse(this.root);
+        return data;
+    }
+
+    depthFirstSearchInOrder(){
+        const data = [];
+        function traverse(node){
+            if(node.left) traverse(node.left);
+            data.push(node.value);
+            if(node.right) traverse(node.right);
+        }
+        traverse(this.root);
+        return data;
+    }
 }
 
 const bst = new BinarySearchTree();
@@ -83,3 +115,6 @@ c("found:",bst.find(5));
 c("found:",bst.find(2));
 c("found:",bst.find(20));
 c("bread first search:", bst.breadthFirstSearch());
+c("depth first search Pre Order:", bst.depthFirstSearchPreOrder());
+c("depth first search Post Order:", bst.depthFirstSearchPostOrder());
+c("depth first search In Order:", bst.depthFirstSearchInOrder());
