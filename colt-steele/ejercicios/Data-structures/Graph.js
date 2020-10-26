@@ -45,6 +45,42 @@ class Graph{
         })(start);
         return result;
     }
+
+    depthFirstIterative(start){
+        const result = [];
+        const stack = [start];
+        const visited = {[start]: true};
+        let current;
+        while(stack.length){
+            current = stack.pop();
+            result.push(current);
+            this.adjacencyList[current].forEach(neighbor => {
+                if(!visited[neighbor]){
+                    visited[neighbor] = true;
+                    stack.push(neighbor);
+                }
+            });
+        }
+        return result;
+    }
+
+    breadthFirst(start){
+        const result = [];
+        const queue = [start];
+        const visited = {[start]: true};
+        let current;
+        while(queue.length){
+            current = queue.shift();
+            result.push(current);
+            this.adjacencyList[current].forEach(neighbor => {
+                if(!visited[neighbor]){
+                    visited[neighbor] = true;
+                    queue.push(neighbor);
+                }
+            });
+        }
+        return result;
+    }
 }
 
 const graph = new Graph();
@@ -75,4 +111,6 @@ graphtoTraverse.addEdge("C","E");
 graphtoTraverse.addEdge("D","E");
 graphtoTraverse.addEdge("D","F");
 graphtoTraverse.addEdge("E","F");
-console.log("Traversed:",graphtoTraverse.depthFirstRecursive("A"));
+console.log("Traversed depthfirst recursively:",graphtoTraverse.depthFirstRecursive("A"));
+console.log("Traversed depthfirst iteratively:",graphtoTraverse.depthFirstIterative("A"));
+console.log("Traversed breadhfirst:",graphtoTraverse.breadthFirst("A"));
